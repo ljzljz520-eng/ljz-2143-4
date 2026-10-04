@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>后厨端 · 菜品完成报告</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <h1>👨‍🍳 后厨出餐台</h1>
+    <div class="spacer"></div>
+    <nav>
+      <a href="/screen.html">C 屏</a>
+      <a href="/kitchen.html" class="active">后厨</a>
+      <a href="/admin.html">管理</a>
+    </nav>
+    <span class="age-badge" id="age">连接中…</span>
+  </div>
+  <div class="offline-banner">⚠ 离线：无法向中心报告，所有按钮已禁用。当前页面仅为缓存视图，不代表中心状态。</div>
+
+  <div class="page-body">
+    <div class="card">
+      <form class="inline" id="open-form">
+        <strong>开单</strong>
+        <input name="pickupNo" placeholder="取餐号（跨日可复用）" required style="width:180px">
+        <input name="name" placeholder="菜名，如 牛肉面" required>
+        <input name="qty" type="number" min="1" value="1" style="width:70px">
+        <select name="windowId" id="new-window"><option>A</option><option>B</option><option>C</option></select>
+        <input name="note" placeholder="备注（可选）" style="width:160px">
+        <button class="confirm" type="submit">开单并加入首道菜</button>
+      </form>
+      <div class="sep"></div>
+      <form class="inline" id="add-form">
+        <strong>追加菜</strong>
+        <select name="orderId" id="add-order" required></select>
+        <input name="name" placeholder="菜名" required>
+        <input name="qty" type="number" min="1" value="1" style="width:70px">
+        <select name="windowId"><option>A</option><option>B</option><option>C</option></select>
+        <button class="action" type="submit">追加</button>
+      </form>
+    </div>
+
+    <div class="section-title" id="making-title">制作中 / 待取餐</div>
+    <div class="grid" id="cards"></div>
+  </div>
+  <div class="toast-host" id="toasts"></div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/kitchen.js"></script>
+</body>
+</html>

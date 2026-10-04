@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C 窗口 · 取餐叫号屏</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <h1>🍜 取餐叫号屏 <small id="date-label" style="color:var(--muted);font-weight:400"></small></h1>
+    <div class="spacer"></div>
+    <div class="switch-row">
+      <label><input type="checkbox" id="sound-toggle" checked> 语音播报</label>
+      <label><input type="checkbox" id="hc-toggle"> 高对比</label>
+      <label>窗口筛选
+        <select id="window-filter"><option value="">全部窗口</option></select>
+      </label>
+      <button class="icon-btn" id="fs-btn">⛶ 全屏</button>
+    </div>
+    <span class="age-badge" id="age">连接中…</span>
+  </div>
+  <div class="offline-banner">⚠ 当前离线：以下为本机缓存画面，数据可能过期；缓存上的任何按钮都不构成中心取餐确认。</div>
+
+  <div class="screen-main" id="screen-main">
+    <div class="promo" id="promo-box">
+      <img id="promo-img" src="/promo.svg" alt="宣传图">
+      <div class="fallback">宣传资源暂不可用<br><br>取餐列表持续有效</div>
+    </div>
+    <div class="ready-panel">
+      <h2>🔔 请取餐 <span style="font-size:13px;color:var(--muted);font-weight:400" id="ready-count"></span></h2>
+      <div class="ready-list" id="ready-list"></div>
+    </div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/screen.js"></script>
+</body>
+</html>

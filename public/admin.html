@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>管理后台 · 事件审计</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <h1>🛠 管理后台（事件投影）</h1>
+    <div class="spacer"></div>
+    <nav>
+      <a href="/screen.html">C 屏</a>
+      <a href="/kitchen.html">后厨</a>
+      <a href="/admin.html" class="active">管理</a>
+    </nav>
+    <button class="icon-btn" id="reload-events">补拉全部事件</button>
+    <span class="age-badge" id="age">连接中…</span>
+  </div>
+  <div class="offline-banner">⚠ 离线：显示缓存数据，操作按钮已禁用，缓存不构成中心确认。</div>
+
+  <div class="page-body">
+    <div class="card">
+      <strong>订单状态转换追溯</strong> <span style="color:var(--muted);font-size:13px">展开任意订单可看到每一次明细版本变化与取餐确认，按事件 seq 排序</span>
+      <div id="orders" style="margin-top:10px"></div>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary><strong>原始事件流（事实源）</strong> <span id="event-count" style="color:var(--muted)"></span></summary>
+        <div style="max-height:420px;overflow:auto;margin-top:8px">
+          <table class="events">
+            <thead><tr><th>seq</th><th>时间</th><th>类型</th><th>订单</th><th>明细/版本</th><th>负载</th></tr></thead>
+            <tbody id="event-rows"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary><strong>被拒绝的操作（并发/闭环审计）</strong></summary>
+        <div style="max-height:260px;overflow:auto;margin-top:8px">
+          <table class="events">
+            <thead><tr><th>时间</th><th>代码</th><th>说明</th></tr></thead>
+            <tbody id="rej-rows"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+  <div class="toast-host" id="toasts"></div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
