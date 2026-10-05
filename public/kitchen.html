@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>后厨报菜端</title><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">👩‍🍳 后厨报菜端</div>
+  <nav><a href="/screen.html">顾客屏</a><a href="/kitchen.html" aria-current="page">后厨</a><a href="/admin.html">管理</a></nav>
+  <div class="spacer"></div>
+  <label class="field" style="min-width:150px"><span style="font-size:12px;font-weight:800;color:#61708a">营业日</span><input type="date" data-date></label>
+  <label class="field" style="min-width:150px"><span style="font-size:12px;font-weight:800;color:#61708a">操作员</span><input data-operator value="后厨A" maxlength="80"></label>
+  <span class="connection" data-connection>正在连接</span>
+  <span class="data-age" data-age></span>
+</header>
+<main>
+  <div class="warning-box" data-offline-warning hidden>断网期间已停用全部操作按钮。列表可能是缓存，不能据此当作中心确认；恢复后会自动拉取最新版本。</div>
+  <section class="panel">
+    <h2>创建订单（可一次分到两个窗口）</h2>
+    <form data-create-form class="grid" style="grid-template-columns: 1fr; gap:12px;">
+      <div class="row">
+        <label class="field" style="max-width:160px"><span>取餐号（留空自动）</span><input name="pickupNo" placeholder="101"></label>
+        <label class="field" style="max-width:180px"><span>订单 ID（留空自动）</span><input name="orderId" placeholder="稳定身份"></label>
+        <label class="field" style="flex:2"><span>备注</span><input name="note" placeholder="口味/共同备注"></label>
+      </div>
+      <div data-item-rows class="grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;"></div>
+      <div class="row">
+        <button type="button" class="secondary" data-add-row>增加明细</button>
+        <button type="submit" class="green">创建订单</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel" style="margin-top:20px;">
+    <h2>营业订单与明细版本</h2>
+    <p class="muted">每个按钮都携带稳定 orderId、itemId 和当前 expectedVersion；完成后请以中心新投影为准。</p>
+    <div class="orders" data-orders>正在加载...</div>
+  </section>
+</main>
+<script type="module" src="/js/kitchen.js"></script>
+</body>
+</html>

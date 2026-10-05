@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C 窗口取餐屏</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="screen-body">
+  <header class="topbar">
+    <div class="brand">C 取餐窗口</div>
+    <div class="spacer"></div>
+    <input type="date" data-date aria-label="营业日" style="color:#fff;background:#111827;border-color:#4b5563;">
+    <span class="connection" data-connection>正在连接</span>
+    <button type="button" class="small secondary" data-test-voice>开启/测试播报</button>
+    <button type="button" class="small secondary" data-fullscreen>全屏切换</button>
+  </header>
+
+  <main class="screen-layout" data-screen-root>
+    <section class="promo-card" aria-label="宣传图">
+      <img class="promo" data-promo src="/promo.svg" alt="今日推荐：招牌牛肉堡与柠檬茶套餐">
+      <div class="promo-fallback" data-promo-fallback hidden>
+        <div>
+          <strong>今日推荐</strong>
+          <p>招牌牛肉堡 · 柠檬茶套餐</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pickup-card" aria-live="polite">
+      <h2>请以下号码取餐</h2>
+      <div class="warning-box" data-offline-warning hidden>
+        当前无法连接中心。以下仅为本机缓存列表，不是新的取餐确认；恢复网络后将自动补齐并校准。
+      </div>
+      <p class="data-age" data-age>尚未收到中心数据</p>
+      <div class="ready-list" data-ready-list></div>
+      <p class="muted" style="margin-top:18px;">取餐号按营业日复用；屏幕重启后恢复同一顺序，只播报新转为可取的号码。</p>
+    </section>
+  </main>
+  <script type="module" src="/js/screen.js"></script>
+</body>
+</html>

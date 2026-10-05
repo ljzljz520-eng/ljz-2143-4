@@ -1,0 +1,22 @@
+{
+  "name": "restaurant-pickup-display",
+  "version": "1.0.0",
+  "description": "Event-sourced restaurant kitchen and pickup display system",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "seed": "node src/seed.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "event-sourcing",
+    "restaurant",
+    "pickup",
+    "sse"
+  ],
+  "license": "MIT"
+}

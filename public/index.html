@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>餐厅取餐提醒系统</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🍜 取餐提醒</div>
+    <nav>
+      <a href="/screen.html">顾客取餐屏 C 窗口</a>
+      <a href="/kitchen.html">后厨 Web 端</a>
+      <a href="/admin.html">管理/审计</a>
+    </nav>
+  </header>
+  <main>
+    <section class="panel">
+      <h1>餐厅取餐提醒全栈系统</h1>
+      <p class="muted">系统以稳定订单 ID 和逐明细版本维护状态，采用事件投影生成取餐屏；取餐号只用于展示，同一营业日唯一、跨营业日可复用。</p>
+      <div class="row">
+        <a class="badge ready" href="/screen.html" style="text-decoration:none;font-size:18px;padding:12px 18px;">打开顾客显示屏</a>
+        <a class="badge preparing" href="/kitchen.html" style="text-decoration:none;font-size:18px;padding:12px 18px;">进入后厨报菜</a>
+        <a class="badge picked" href="/admin.html" style="text-decoration:none;font-size:18px;padding:12px 18px;">查看状态转换流水</a>
+      </div>
+    </section>
+    <section class="grid" style="margin-top:20px;">
+      <article class="panel">
+        <h2>核心约束</h2>
+        <ul>
+          <li>一单可拆分 A/B 两个窗口；只有所有未取消明细的具体版本全部完成，订单才进入“可取餐”。</li>
+          <li>追加菜、取消、完成、撤销、重做都追加事件，并让对应明细版本递增；不会用最后一条聊天/报菜消息覆盖订单状态。</li>
+          <li>并发命令在中心串行事务中按版本处理；旧版本撤销/重做收到冲突，必须刷新后再操作。</li>
+          <li>重做发生在取餐后时，中心拒绝修改原单；需要更正请追加新订单或按补偿流程处理。</li>
+          <li>顾客屏断网只展示缓存数据和数据时效，不提供中心确认按钮，防止把本地缓存误作已确认。</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h2>验收入口</h2>
+        <p>运行 <code>npm run seed</code> 后，示例 101 单号在 A 窗口已完成、B 窗口未完成，因此不会提前上屏。</p>
+        <p class="muted">管理页可按订单查看每个明细与每次订单状态转换。</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

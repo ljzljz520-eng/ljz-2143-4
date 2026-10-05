@@ -1,0 +1,43 @@
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>管理与审计</title><link rel="stylesheet" href="/styles.css">
+</head><body>
+<header class="topbar">
+  <div class="brand">🛡️ 管理与审计</div>
+  <nav><a href="/screen.html">顾客屏</a><a href="/kitchen.html">后厨</a><a href="/admin.html" aria-current="page">管理</a></nav>
+  <div class="spacer"></div>
+  <label class="field" style="min-width:160px"><span style="font-size:12px;font-weight:800;color:#61708a">营业日</span><input type="date" data-date></label>
+  <span class="connection" data-connection>正在连接</span><span class="data-age" data-age></span>
+</header>
+<main class="grid">
+  <section class="panel">
+    <h2>订单汇总投影</h2>
+    <p class="muted">投影由事件重放产生；取餐号显示营业日，所有操作必须匹配稳定 orderId。</p>
+    <div data-orders>加载中...</div>
+  </section>
+  <aside class="panel">
+    <h2>事件段检查/补拉</h2>
+    <label class="field"><span>起始版本（after）</span><input type="number" value="0" data-after></label>
+    <div class="row" style="margin:10px 0"><button data-fetch-events>拉取事件</button></div>
+    <div class="statusline" data-gap-result>输入版本号可验证缺段检测；客户端缺段时会改拉 /api/state 全量快照。</div>
+    <h2 style="margin-top:20px">系统说明</h2>
+    <ul class="muted" style="padding-left:20px;">
+      <li>并发写入进入同一中心临界区。</li>
+      <li>明细乐观版本防止旧按钮覆盖。</li>
+      <li>取消/撤销/重做均保留为事件。</li>
+      <li>整单状态由活动明细投影，不直接被消息设置。</li>
+    </ul>
+  </aside>
+  <section class="panel" style="grid-column:1/-1">
+    <h2>状态转换追踪</h2>
+    <div style="overflow:auto;max-height:420px"><table>
+      <thead><tr><th>#</th><th>时间</th><th>取餐号/日期</th><th>转换</th><th>顺序</th><th>操作人</th><th>事件</th><th>原因</th><th>订单 ID</th></tr></thead>
+      <tbody data-transitions></tbody>
+    </table></div>
+  </section>
+  <section class="panel" style="grid-column:1/-1">
+    <h2>明细版本历史（选择订单）</h2>
+    <label class="field" style="max-width:380px"><span>订单 ID</span><select data-order-select></select></label>
+    <div data-detail></div>
+  </section>
+</main><script type="module" src="/js/admin.js"></script></body></html>
